@@ -21,6 +21,7 @@ import {
   shouldHaveStats,
   shouldHaveInjectedHits,
   shouldHaveSorts,
+  shouldHavePersona,
 } from '@/config/featuresConfig';
 import { sortBy } from '@/config/sortByConfig';
 import { queryAtom } from '@/config/searchboxConfig';
@@ -86,6 +87,7 @@ const SrpLaptop = ({ setSrpIsLoaded, srpIsLoaded }) => {
   const { state } = useLocation();
 
   // Persona
+  const shouldShowPersonasAtom = useRecoilValue(shouldHavePersona);
   const userToken = useRecoilValue(personaSelectedAtom);
 
   // Segments
@@ -149,7 +151,7 @@ const SrpLaptop = ({ setSrpIsLoaded, srpIsLoaded }) => {
             }
             analytics={false}
             userToken={userToken}
-            enablePersonalization={true}
+            enablePersonalization={shouldShowPersonasAtom}
             filters={
               state?.type === 'filter' && state?.action !== null
                 ? state.action

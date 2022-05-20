@@ -22,6 +22,8 @@ import {
   federatedRef,
 } from '@/config/federatedConfig';
 
+import { shouldHavePersona } from '@/config/featuresConfig'
+
 // Sharing query to general state
 import { queryAtom, searchBoxAtom } from '@/config/searchboxConfig';
 
@@ -50,6 +52,7 @@ import Redirect from '@/components/redirects/Redirect';
 
 const FederatedSearch = () => {
   // Recoil & States
+  const shouldShowPersonasAtom = useRecoilValue(shouldHavePersona);
   const personaSelect = useRecoilValue(personaSelectedAtom);
   const segmentSelect = useRecoilValue(segmentSelectedAtom);
   const setIsFederated = useSetRecoilState(shouldHaveOpenFederatedSearch);
@@ -127,7 +130,7 @@ const FederatedSearch = () => {
                 hitsPerPage={3}
                 query={query}
                 userToken={personaSelect}
-                enablePersonalization={true}
+                enablePersonalization={shouldShowPersonasAtom}
               />
               <QuerySuggestions />
             </Index>
@@ -145,7 +148,7 @@ const FederatedSearch = () => {
               hitsPerPage={6}
               userToken={personaSelect}
               optionalFilters={segmentSelect}
-              enablePersonalization={true}
+              enablePersonalization={shouldShowPersonasAtom}
             />
             <Products />
           </div>

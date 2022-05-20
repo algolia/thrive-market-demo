@@ -1,3 +1,7 @@
+# Thrive Market Demo
+
+By: Jeffrey Slentz & Kevin Xu
+
 # React Boilerplate for Custom Demos
 
 - [Get started](#️-get-started)

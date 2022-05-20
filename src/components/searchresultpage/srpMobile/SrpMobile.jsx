@@ -28,6 +28,7 @@ import {
   shouldHaveStats,
   shouldHaveInjectedHits,
   shouldHaveSorts,
+  shouldHavePersona,
 } from '@/config/featuresConfig';
 import { sortBy } from '@/config/sortByConfig';
 import { queryAtom } from '@/config/searchboxConfig';
@@ -90,8 +91,9 @@ const SrpMobile = ({ setSrpIsLoaded, srpIsLoaded }) => {
 
   // Get states of React Router
   const { state } = useLocation();
-
+  
   // Persona
+  const shouldShowPersonasAtom = useRecoilValue(shouldHavePersona);
   const userToken = useRecoilValue(personaSelectedAtom);
 
   // Segments
@@ -148,7 +150,7 @@ const SrpMobile = ({ setSrpIsLoaded, srpIsLoaded }) => {
           hitsPerPage={injected ? hitsPerPageInjected : hitsPerPageNotInjected}
           analytics={false}
           userToken={userToken}
-          enablePersonalization={true}
+          enablePersonalization={shouldShowPersonasAtom}
           filters={
             state?.type === 'filter' && state?.action !== null
               ? state.action
